@@ -1,6 +1,11 @@
 spring:
   application:
     name: msUsers
+  config:
+    import: optional:configserver:http://localhost:8888/  
+  cloud:
+    config:
+      profile: test  
 
 server:
   port: 0

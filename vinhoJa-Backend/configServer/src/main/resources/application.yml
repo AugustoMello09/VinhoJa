@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: ms-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/AugustoMello09/vinhoja-config-server
+          default-label: main
+          search-paths:
+          - 'user*'  
+
+server:
+  port: 8888
+  
+      

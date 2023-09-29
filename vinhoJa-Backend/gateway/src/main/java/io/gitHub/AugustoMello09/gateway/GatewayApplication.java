@@ -21,7 +21,7 @@ public class GatewayApplication {
 	public RouteLocator routes(RouteLocatorBuilder builder) {
 		return builder
 				.routes()
-				.route(r -> r.path("/users/**").uri("lb://msUsers"))
+				.route(r -> r.path("/users/**", "/roles/**").uri("lb://msUsers"))
 				.build();
 	}
 

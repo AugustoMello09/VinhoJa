@@ -6,7 +6,7 @@ spring:
       discovery:
         locator:
           enabled: true
-          lower-case-service-id: true
+          lower-case-service-id: true       
 
 server:
   port: 8080
@@ -17,3 +17,11 @@ eureka:
     register-with-eureka: true
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+
+        
+
+  
+        
+
+              

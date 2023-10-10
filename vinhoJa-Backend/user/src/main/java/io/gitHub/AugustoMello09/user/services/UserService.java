@@ -19,17 +19,15 @@ import io.gitHub.AugustoMello09.user.services.exceptions.ObjectNotFoundException
 
 @Service
 public class UserService {
-	
+
 	@Autowired
 	private UserRepository repository;
-	
+
 	@Autowired
 	private RoleRepository roleRepository;
-	
+
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-	
-	
 
 	@Transactional
 	public UserDTO create(UserDTOInsert objDto) {
@@ -39,13 +37,13 @@ public class UserService {
 		entity = repository.save(entity);
 		return new UserDTO(entity);
 	}
-	
+
 	public UserDTO findById(UUID id) {
 		Optional<User> entity = repository.findById(id);
-		User obj = entity.orElseThrow(()-> new ObjectNotFoundException("ID não encontrado"));
+		User obj = entity.orElseThrow(() -> new ObjectNotFoundException("ID não encontrado"));
 		return new UserDTO(obj);
 	}
-	
+
 	protected void copyToEntity(UserDTO dto, User entity) {
 		entity.setNome(dto.getNome());
 		entity.setEmail(dto.getEmail());
@@ -62,7 +60,5 @@ public class UserService {
 		}
 		return new UserDTO(user);
 	}
-
-
 
 }

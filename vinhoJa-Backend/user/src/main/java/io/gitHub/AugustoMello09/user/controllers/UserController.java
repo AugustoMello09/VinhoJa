@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -23,6 +24,7 @@ public class UserController {
 	
 	@Autowired
 	private UserService service;
+	
 	
 	@GetMapping
 	public String status() {
@@ -44,10 +46,13 @@ public class UserController {
 		return ResponseEntity.created(uri).body(newObj);
 	}
 	
-	@GetMapping(params = "email")
-	public ResponseEntity<UserDTO> findByEmail(String email){
+	
+	@GetMapping(value = "/search")
+	public ResponseEntity<UserDTO> findByEmail(@RequestParam(value = "email") String email){
 		UserDTO obj = service.findByEmail(email);
 		return ResponseEntity.ok().body(obj);
 	}
+	
+
 
 }

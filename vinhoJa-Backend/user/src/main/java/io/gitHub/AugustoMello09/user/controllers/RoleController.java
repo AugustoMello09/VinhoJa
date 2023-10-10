@@ -21,6 +21,7 @@ public class RoleController {
 	@Autowired
 	private RoleService service;
 	
+
 	@GetMapping
 	public String status() {
 		return "ok";

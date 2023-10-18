@@ -10,6 +10,6 @@ import io.gitHub.AugustoMello09.user.entities.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID>{
 
-	User findByEmail(String cpf);
+	User findByEmail(String email);
 
 }

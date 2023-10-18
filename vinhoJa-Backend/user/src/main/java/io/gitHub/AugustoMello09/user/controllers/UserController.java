@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import io.gitHub.AugustoMello09.user.dto.UserDTO;
-import io.gitHub.AugustoMello09.user.dto.UserDTOInsert;
 import io.gitHub.AugustoMello09.user.services.UserService;
 
 @RestController
@@ -38,7 +37,7 @@ public class UserController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<UserDTO> create(@RequestBody UserDTOInsert objDto){
+	public ResponseEntity<UserDTO> create(@RequestBody UserDTO objDto){
 		UserDTO newObj = service.create(objDto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.query("id={id}")

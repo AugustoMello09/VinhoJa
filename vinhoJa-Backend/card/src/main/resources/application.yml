@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: msCards
+  config:
+    import: optional:configserver:http://localhost:8888/  
+  cloud:
+    config:
+      profile: test 
+   
+   
+server:
+  port: 0
+  
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}

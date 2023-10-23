@@ -34,4 +34,7 @@ public class CardController {
 				.buildAndExpand(newObj.getId()).toUri();
 		return ResponseEntity.created(uri).body(newObj);
 	}
+	
+	
+	
 }

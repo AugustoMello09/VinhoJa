@@ -23,6 +23,7 @@ public class GatewayApplication {
 				.routes()
 				.route(r -> r.path("/users/**").uri("lb://msUsers"))
 				.route(r -> r.path("/cards/**").uri("lb://msCards"))
+				.route(r -> r.path("/payment/**").uri("lb://msPayment"))
 				.build();
 	}
 

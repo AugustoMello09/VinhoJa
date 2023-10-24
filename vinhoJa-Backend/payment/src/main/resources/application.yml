@@ -1,6 +1,11 @@
 spring:
   application:
     name: msPayment
+  config:
+    import: optional:configserver:http://localhost:8888/  
+  cloud:
+    config:
+      profile: test  
  
   
 server:

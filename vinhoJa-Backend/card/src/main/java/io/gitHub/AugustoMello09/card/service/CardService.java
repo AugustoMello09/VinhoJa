@@ -25,7 +25,6 @@ public class CardService {
 	@Transactional
 	public CardDTO create(CardDTO obj) {
 		Card entity = new Card();
-		entity.setCpf(obj.getCpf());
 		entity.setNomeCartao(obj.getNomeCartao());
 		entity.setNumeroCartao(passwordEncoder.encode(obj.getNumeroCartao()));
 		entity.setCod(passwordEncoder.encode(obj.getCod()));

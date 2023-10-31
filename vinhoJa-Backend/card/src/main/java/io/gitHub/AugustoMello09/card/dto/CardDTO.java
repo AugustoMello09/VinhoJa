@@ -12,8 +12,6 @@ public class CardDTO {
 
 	private UUID id;
 
-	private String cpf;
-
 	private String nomeCartao;
 
 	private String numeroCartao;
@@ -24,7 +22,6 @@ public class CardDTO {
 	
 	public CardDTO(Card entity) {
 		id = entity.getId();
-		cpf = entity.getCpf();
 		nomeCartao = entity.getNomeCartao();
 		numeroCartao = entity.getNumeroCartao();
 		cod = entity.getCod();

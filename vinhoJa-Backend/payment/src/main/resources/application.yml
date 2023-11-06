@@ -1,12 +1,19 @@
 spring:
+  main:
+    allow-circular-references: true
   application:
-    name: msPayment
+    name: msPayment 
   config:
     import: optional:configserver:http://localhost:8888/  
   cloud:
     config:
-      profile: test  
- 
+      profile: test
+  rabbitmq:
+    host: localhost
+    port: 5672
+    password: guest
+    username: guest      
+
   
 server:
   port: 0
@@ -18,3 +25,7 @@ eureka:
       defaultZone: http://localhost:8761/eureka
   instance:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+mq:
+  queues: 
+    emissao-pagamento: emissao-pagamento

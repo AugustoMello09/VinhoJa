@@ -20,24 +20,29 @@ import io.gitHub.AugustoMello09.payment.services.PaymentService;
 @RestController
 @RequestMapping(value = "/payment")
 public class PaymentController {
-	
-	@Autowired
+
 	private PaymentService service;
-	
+
+	@Autowired
+	public void setPaymentService(PaymentService paymentService) {
+		this.service = paymentService;
+	}
+
 	@GetMapping
 	public String status() {
 		return "ok";
 	}
-	
+
 	@GetMapping(value = "/situacaoCliente/Cliente/{idCliente}/Cartao/{idCartao}")
-	public ResponseEntity<SituacaoCliente> situacaoCliente(@PathVariable UUID idCliente, @PathVariable UUID idCartao){
+	public ResponseEntity<SituacaoCliente> situacaoCliente(@PathVariable UUID idCliente, @PathVariable UUID idCartao) {
 		SituacaoCliente obj = service.obterSituacao(idCartao, idCliente);
 		return ResponseEntity.ok().body(obj);
 	}
-	
-	@PostMapping(value = "/{idCartao}")
-	public ResponseEntity<PaymentDTO> fazerPagamento(@RequestBody PaymentDTO obj, @PathVariable UUID idCartao){
-		PaymentDTO newObj = service.processarPagameto(obj, idCartao);
+
+	@PostMapping(value = "/{idCartao}/{idUsuario}")
+	public ResponseEntity<PaymentDTO> fazerPagamento(@RequestBody PaymentDTO obj, @PathVariable UUID idCartao,
+			@PathVariable UUID idUsuario) {
+		PaymentDTO newObj = service.processarPagameto(obj, idCartao, idUsuario);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
 		return ResponseEntity.created(uri).body(newObj);
 	}

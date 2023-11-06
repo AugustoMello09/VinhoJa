@@ -10,11 +10,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class PaymentDTO {
-	
+
 	private Long id;
 	private BigDecimal valor;
 	private LocalDate data;
-	
+
+
 	public PaymentDTO(Payment entity) {
 		id = entity.getId();
 		valor = entity.getValor();

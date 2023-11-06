@@ -12,6 +12,8 @@ import feign.FeignException.FeignClientException;
 import io.gitHub.AugustoMello09.payment.dto.PaymentDTO;
 import io.gitHub.AugustoMello09.payment.feign.CardFeign;
 import io.gitHub.AugustoMello09.payment.feign.ClienteFeign;
+import io.gitHub.AugustoMello09.payment.infra.PaymentProducer;
+import io.gitHub.AugustoMello09.payment.model.Cliente;
 import io.gitHub.AugustoMello09.payment.model.Payment;
 import io.gitHub.AugustoMello09.payment.model.SituacaoCliente;
 import io.gitHub.AugustoMello09.payment.repositories.PaymentRepository;
@@ -33,6 +35,9 @@ public class PaymentService {
 	@Autowired
 	private PaymentRepository repository;
 
+	@Autowired
+	private PaymentProducer producer;
+
 	public SituacaoCliente obterSituacao(UUID idCartao, UUID idCliente) {
 		try {
 			var cliente = clienteFeign.findById(idCliente);
@@ -53,16 +58,17 @@ public class PaymentService {
 	}
 
 	@Transactional
-	public PaymentDTO processarPagameto(PaymentDTO dto, UUID idCartao) {
+	public PaymentDTO processarPagameto(PaymentDTO dto, UUID idCartao, UUID idUsuario) {
 		try {
 			log.info("Cartao ID: " + idCartao);
 			cardFeign.findById(idCartao);
 			Payment entity = new Payment();
 			entity.setData(LocalDate.now());
 			entity.setValor(dto.getValor());
+			Cliente userDetailsDTO = clienteFeign.findById(idUsuario).getBody();
 			repository.save(entity);
+			producer.paymentConfirmation(userDetailsDTO);
 			return new PaymentDTO(entity);
-
 		} catch (FeignClientException e) {
 			int status = e.status();
 			if (HttpStatus.NOT_FOUND.value() == status) {
@@ -70,7 +76,6 @@ public class PaymentService {
 			}
 			throw new ErroComunicacaoMicrosserviceException("Erro na comunicação entre Microsservices ", status);
 		}
-
 	}
 
 }

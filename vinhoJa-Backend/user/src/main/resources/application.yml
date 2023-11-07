@@ -5,8 +5,8 @@ spring:
     import: optional:configserver:http://localhost:8888/  
   cloud:
     config:
-      profile: default  
-   
+      profile: default
+       
 server:
   port: 0
   

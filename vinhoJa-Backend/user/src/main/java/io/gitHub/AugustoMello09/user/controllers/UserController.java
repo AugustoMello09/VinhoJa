@@ -20,38 +20,33 @@ import io.gitHub.AugustoMello09.user.services.UserService;
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
-	
+
 	@Autowired
 	private UserService service;
-	
-	
+
 	@GetMapping
 	public String status() {
 		return "ok";
 	}
-	
+
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<UserDTO> findById(@PathVariable UUID id){
+	public ResponseEntity<UserDTO> findById(@PathVariable UUID id) {
 		UserDTO entityDto = service.findById(id);
 		return ResponseEntity.ok().body(entityDto);
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<UserDTO> create(@RequestBody UserDTO objDto){
+	public ResponseEntity<UserDTO> create(@RequestBody UserDTO objDto) {
 		UserDTO newObj = service.create(objDto);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-				.query("id={id}")
-				.buildAndExpand(newObj.getId()).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().query("id={id}").buildAndExpand(newObj.getId())
+				.toUri();
 		return ResponseEntity.created(uri).body(newObj);
 	}
-	
-	
+
 	@GetMapping(value = "/search")
-	public ResponseEntity<UserDTO> findByEmail(@RequestParam(value = "email") String email){
+	public ResponseEntity<UserDTO> findByEmail(@RequestParam(value = "email") String email) {
 		UserDTO obj = service.findByEmail(email);
 		return ResponseEntity.ok().body(obj);
 	}
-	
-
 
 }

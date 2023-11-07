@@ -20,13 +20,10 @@ import io.gitHub.AugustoMello09.payment.services.PaymentService;
 @RestController
 @RequestMapping(value = "/payment")
 public class PaymentController {
-
+	
+	@Autowired
 	private PaymentService service;
 
-	@Autowired
-	public void setPaymentService(PaymentService paymentService) {
-		this.service = paymentService;
-	}
 
 	@GetMapping
 	public String status() {

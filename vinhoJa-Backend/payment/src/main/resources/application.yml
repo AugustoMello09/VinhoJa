@@ -2,7 +2,7 @@ spring:
   main:
     allow-circular-references: true
   application:
-    name: msPayment 
+    name: msPayment-service 
   config:
     import: optional:configserver:http://localhost:8888/  
   cloud:
@@ -29,3 +29,6 @@ eureka:
 mq:
   queues: 
     emissao-pagamento: emissao-pagamento
+    
+springdoc:
+  show-actuator: true    

@@ -1,6 +1,6 @@
 spring:
   application:
-    name: msEmail
+    name: msEmail-service
   config:
     import: optional:configserver:http://localhost:8888/  
   cloud:
@@ -37,4 +37,7 @@ eureka:
     
 mq:
   queues: 
-    emissao-pagamento: emissao-pagamento     
+    emissao-pagamento: emissao-pagamento 
+
+springdoc:
+  show-actuator: true        

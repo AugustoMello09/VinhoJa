@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import io.gitHub.AugustoMello09.payment.model.Cliente;
 
-@FeignClient(value = "msUsers", path = "/users")
+@FeignClient(value = "msUsers-service", path = "/users-service")
 public interface ClienteFeign {
 	
 	@GetMapping(value = "/{id}")

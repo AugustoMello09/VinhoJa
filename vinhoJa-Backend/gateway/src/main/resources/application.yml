@@ -6,11 +6,44 @@ spring:
       discovery:
         locator:
           enabled: true
-          lower-case-service-id: true 
-                
+          lower-case-service-id: true
+      routes:
+      - id: users-service
+        uri: lb://msUsers-service
+        predicates:
+        - Path=/users/**
+        filters:
+        - RewritePath=/users/(?<path>.*), /$\{path}
+      - id: payment-service
+        uri: lb://msPayment-service
+        predicates:
+        - Path=/payment/**
+        filters:
+        - RewritePath=/payment/(?<path>.*), /$\{path}  
+      - id: email-service
+        uri: lb://msEmail-service
+        predicates:
+        - Path=/email/**
+        filters:
+        - RewritePath=/email/(?<path>.*), /$\{path}  
+      - id: cards-service
+        uri: lb://msCards-service
+        predicates:
+        - Path=/cards/**
+        filters:
+        - RewritePath=/cards/(?<path>.*), /$\{path}    
+      - id: openapi
+        uri: http://localhost:${server.port}
+        predicates:
+        - Path=/v3/api-docs/**
+        filters:
+        - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
 
+   
+                
 server:
   port: 8080
+
 
 eureka:
   client:
@@ -20,8 +53,18 @@ eureka:
       defaultZone: http://localhost:8761/eureka
 
 
-        
-
+springdoc:
+  swagger-ui:
+    urls:
+      - name: users
+        url: /v3/api-docs/users
+      - name: cards
+        url: /v3/api-docs/cards
+      - name: email
+        url: /v3/api-docs/email
+      - name: payment
+        url: /v3/api-docs/payment      
+  
   
         
 

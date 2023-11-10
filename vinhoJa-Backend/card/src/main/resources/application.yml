@@ -1,6 +1,6 @@
 spring:
   application:
-    name: msCards
+    name: msCards-service
   config:
     import: optional:configserver:http://localhost:8888/  
   cloud:
@@ -20,3 +20,5 @@ eureka:
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
     
    
+springdoc:
+  show-actuator: true

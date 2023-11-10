@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import io.gitHub.AugustoMello09.payment.model.Cartao;
 
-@FeignClient(value = "msCards", path = "/cards")
+@FeignClient(value = "msCards-service", path = "/cards-service")
 public interface CardFeign {
 	
 	@GetMapping(value = "/{id}")

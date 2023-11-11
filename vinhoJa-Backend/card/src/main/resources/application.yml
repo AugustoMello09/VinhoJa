@@ -22,3 +22,8 @@ eureka:
    
 springdoc:
   show-actuator: true
+  
+management:
+  tracing:
+    sampling:
+      probability: 1.0  

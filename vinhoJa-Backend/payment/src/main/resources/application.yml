@@ -17,7 +17,6 @@ spring:
   
 server:
   port: 0
-  
 
 eureka:
   client:
@@ -31,4 +30,9 @@ mq:
     emissao-pagamento: emissao-pagamento
     
 springdoc:
-  show-actuator: true    
+  show-actuator: true 
+  
+management:
+  tracing:
+    sampling:
+      probability: 1.0     

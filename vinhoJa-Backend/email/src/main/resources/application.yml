@@ -40,4 +40,9 @@ mq:
     emissao-pagamento: emissao-pagamento 
 
 springdoc:
-  show-actuator: true        
+  show-actuator: true 
+  
+management:
+  tracing:
+    sampling:
+      probability: 1.0         

@@ -44,6 +44,10 @@ spring:
 server:
   port: 8080
 
+management:
+  tracing:
+    sampling:
+      probability: 1.0
 
 eureka:
   client:

@@ -97,6 +97,7 @@
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-tracing</artifactId>
 		</dependency>
+	
 	</dependencies>
 
 
@@ -131,6 +132,9 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+					<image>
+						<builder>paketobuildpacks/builder-jammy-base:latest</builder>
+					</image>
 				</configuration>
 			</plugin>
 		</plugins>

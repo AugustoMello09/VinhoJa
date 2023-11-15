@@ -14,16 +14,18 @@ public class GatewayApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GatewayApplication.class, args);
 	}
-	
+
 	@Bean
 	public RouteLocator routes(RouteLocatorBuilder builder) {
-		return builder
-				.routes()
-				.route(r -> r.path("/users-service/**").uri("lb://msUsers-service"))
+		return builder.routes().route(r -> r.path("/users-service/**").uri("lb://msUsers-service"))
 				.route(r -> r.path("/cards-service/**").uri("lb://msCards-service"))
 				.route(r -> r.path("/payment-service/**").uri("lb://msPayment-service"))
-				.route(r -> r.path("/email-service/**").uri("lb://msEmail-service"))
-				.build();
+				.route(r -> r.path("/email-service/**").uri("lb://msEmail-service")).build();
 	}
+	
+
+
+	
+
 
 }

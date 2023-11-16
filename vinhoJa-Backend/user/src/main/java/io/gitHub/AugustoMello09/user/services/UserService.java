@@ -21,7 +21,7 @@ public class UserService {
 
 	@Transactional
 	public UserDTO create(UserDTO objDto) {
-		findByEmail(objDto);
+		verificaEmailExistente(objDto);
 		User entity = new User();
 		entity.setNome(objDto.getNome());
 		entity.setEmail(objDto.getEmail());
@@ -35,7 +35,15 @@ public class UserService {
 		return new UserDTO(obj);
 	}
 	
-	public void findByEmail(UserDTO obj) {
+	public UserDTO findByEmail(String email) {
+		User user = repository.findByEmail(email).get();
+		if (user == null) {
+			throw new ObjectNotFoundException("Email não encontrado");
+		}
+		return new UserDTO(user);
+    }		
+	
+	public void verificaEmailExistente(UserDTO obj) {
 		Optional<User> entity = repository.findByEmail(obj.getEmail());
 		if (entity.isPresent() && !entity.get().getId().equals(obj.getId())) {
 			throw new DataIntegratyViolationException("Email já existe");

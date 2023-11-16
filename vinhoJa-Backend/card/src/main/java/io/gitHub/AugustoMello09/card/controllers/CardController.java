@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -48,6 +49,13 @@ public class CardController {
 	public ResponseEntity<CardDTO> findById(@PathVariable UUID id){
 		CardDTO card = service.findById(id);
 		return ResponseEntity.ok().body(card);
+	}
+	
+	@Operation(summary = "Busca um Cartão no banco de dados por número de cartão.")
+	@GetMapping(value = "/search")
+	public ResponseEntity<CardDTO> findByNumeroCartao(@RequestParam(value = "numeroCartao") String numeroCartao){
+		CardDTO obj = service.findByNumeroCartao(numeroCartao);
+		return ResponseEntity.ok().body(obj);
 	}
 	
 	

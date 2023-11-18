@@ -8,7 +8,7 @@ spring:
           uri: https://github.com/AugustoMello09/vinhoja-config-server
           default-label: main
           search-paths:
-          - 'user*'  
+          - 'vinhoja-cofig-server*'  
 
 server:
   port: 8888

@@ -1,0 +1,34 @@
+version: '3.4'
+
+services:
+  euraka-service:
+    image: euraka-service:v1
+    ports:
+      - 8761:8761
+    networks:
+      - vinhoja-network 
+
+  zipkin-service:
+    image: openzipkin/zipkin:2.23.2
+    ports:
+      - 9411:9411
+    networks:
+      - vinhoja-network
+
+  gateway:
+     image: gateway:v1
+     ports:
+      - 8080:8080
+     depends_on:
+       - euraka-service
+     environment:
+        EUREKA.CLIENT.FETCHREGISTRY: true
+        EUREKA.CLIENT.REGISTERWITHEUREKA: true
+        EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://euraka-service:8761/eureka/
+        SPRING.ZIPKIN.BASEURL: https://zipkin-service:9411/
+     networks:
+      - vinhoja-network         
+networks:
+  vinhoja-network:
+    driver: bridge      
+

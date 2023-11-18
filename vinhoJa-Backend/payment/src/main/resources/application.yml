@@ -1,13 +1,11 @@
 spring:
-  main:
-    allow-circular-references: true
   application:
     name: msPayment-service 
   config:
-    import: optional:configserver:http://localhost:8888/  
+    import: optional:configserver:http://localhost:8888/
   cloud:
     config:
-      profile: test
+      profile: dev 
   rabbitmq:
     host: localhost
     port: 5672

@@ -1,0 +1,1 @@
+create table tb_email (status_email tinyint check (status_email between 0 and 1), send_date_email timestamp(6), email_id uuid not null, user_id uuid, email_from varchar(255), email_to varchar(255), subject varchar(255), text TEXT, primary key (email_id));

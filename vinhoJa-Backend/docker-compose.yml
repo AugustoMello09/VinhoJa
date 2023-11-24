@@ -1,8 +1,23 @@
 version: '3.4'
 
 services:
-  euraka-service:
-    image: euraka-service:v1
+  config-service:
+    build:
+      dockerfile: ./configServer/Dockerfile
+      context: .
+    image: vinhoja/config:0.0.1
+    container_name: config-service
+    ports:
+      - 8888:8888
+    networks:
+      - vinhoja-network 
+
+  eureka-service:
+    build:
+      dockerfile: ./eureka/Dockerfile
+      context: .
+    image: vinhoja/eureka:0.0.1
+    container_name: eureka-service
     ports:
       - 8761:8761
     networks:
@@ -10,25 +25,50 @@ services:
 
   zipkin-service:
     image: openzipkin/zipkin:2.23.2
+    container_name: zipkin-service
     ports:
       - 9411:9411
     networks:
       - vinhoja-network
 
-  gateway:
-     image: gateway:v1
-     ports:
+  gateway-service:
+    build:
+      dockerfile: ./gateway/Dockerfile
+      context: .
+    image: vinhoja/gateway:0.0.1
+    container_name: gateway-service
+    environment:
+      - eureka.client.fetch-registry = true
+      - eureka.client.register-with-eureka = true
+      - eureka.client.serviceUrl.defaultZone = http://eureka-service:8761/eureka
+      - spring.cloud.config.uri = http://config-service:8888
+      - spring.zipkin.base-url = http://zipkin-service:9411
+    ports:
       - 8080:8080
-     depends_on:
-       - euraka-service
-     environment:
-        EUREKA.CLIENT.FETCHREGISTRY: true
-        EUREKA.CLIENT.REGISTERWITHEUREKA: true
-        EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://euraka-service:8761/eureka/
-        SPRING.ZIPKIN.BASEURL: https://zipkin-service:9411/
-     networks:
-      - vinhoja-network         
+    networks:
+      - vinhoja-network
+    depends_on:
+      - config-service
+      - eureka-service
+      - zipkin-service
+
+  user-service:
+    build:
+      dockerfile: ./user/Dockerfile
+      context: .
+    image: vinhoja/user:0.0.1
+    container_name: user-service
+    environment:
+      - SPRING_PROFILES_ACTIVE = test
+      - eureka.client.service-url.defaultZone = http://eureka-service:8761/eureka
+      - spring.cloud.import = optional:configserver:http://config-service:8888
+    networks:
+      - vinhoja-network
+    depends_on:
+      - config-service
+      - eureka-service
+      - zipkin-service
+
 networks:
   vinhoja-network:
-    driver: bridge      
-
+    driver: bridge

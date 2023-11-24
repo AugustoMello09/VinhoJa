@@ -4,6 +4,7 @@ spring:
   cloud:
     config:
       server:
+        enabled: true
         git:
           uri: https://github.com/AugustoMello09/vinhoja-config-server
           default-label: main

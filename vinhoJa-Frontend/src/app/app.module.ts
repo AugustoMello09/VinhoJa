@@ -20,6 +20,8 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
 import { StepsComponent } from './components/template/steps/steps.component';
 import { ProdutoComponent } from './components/produto/produto.component';
 import { CartaoComponent } from './components/cartao/cartao.component';
+import { ConfirmacaoComponent } from './components/confirmacao/confirmacao.component';
+import { FimComponent } from './components/fim/fim.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import { CartaoComponent } from './components/cartao/cartao.component';
     UsuarioComponent,
     StepsComponent,
     ProdutoComponent,
-    CartaoComponent
+    CartaoComponent,
+    ConfirmacaoComponent,
+    FimComponent
   ],
   imports: [
     BrowserModule,

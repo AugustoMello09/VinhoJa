@@ -21,6 +21,14 @@ export class StepsComponent implements OnInit {
       {
         label: 'Dados Financeiro',
         routerLink: '/cartao'
+      },
+      { 
+        label: 'Confirmação',
+        routerLink: '/confirmar'
+      },
+      {
+        label: 'Fim',
+        routerLink: '/fim'
       },];
   }
 

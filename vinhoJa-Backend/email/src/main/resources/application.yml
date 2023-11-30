@@ -2,10 +2,10 @@ spring:
   application:
     name: msEmail-service
   config:
-    import: optional:configserver:http://localhost:8888/  
+    import: optional:configserver:http://localhost:8888
   cloud:
     config:
-      profile: dev 
+      profile: test 
   rabbitmq:
     host: localhost
     port: 5672
@@ -45,4 +45,7 @@ springdoc:
 management:
   tracing:
     sampling:
-      probability: 1.0         
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans             

@@ -7,10 +7,16 @@ services:
       context: .
     image: vinhoja/config:0.0.1
     container_name: config-service
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://config-service:8888/actuator/health"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 0s
     ports:
       - 8888:8888
     networks:
-      - vinhoja-network 
+      - vinhoja-network
 
   eureka-service:
     build:
@@ -21,15 +27,41 @@ services:
     ports:
       - 8761:8761
     networks:
-      - vinhoja-network 
+      - vinhoja-network
 
   zipkin-service:
-    image: openzipkin/zipkin:2.23.2
+    image: openzipkin/zipkin:latest
     container_name: zipkin-service
     ports:
       - 9411:9411
+    environment:
+      - rabbit_uri = amqp://guest:guest@rabbit-mq:5672  
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-S", "http://zipkin-service:9411/"]
+      interval: 5s
+      retries: 5
+      timeout: 10s
+      start_period: 0s
+    depends_on:
+      rabbit-mq:
+        condition: service_healthy       
     networks:
       - vinhoja-network
+
+  rabbit-mq:
+    image: rabbitmq:3.12-management
+    container_name: rabbit-mq
+    ports:
+     - 5672:5672
+     - 15672:15672
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 5s
+      retries: 5
+      timeout: 10s
+      start_period: 0s
+    networks:
+      - vinhoja-network   
 
   gateway-service:
     build:
@@ -41,16 +73,16 @@ services:
       - eureka.client.fetch-registry = true
       - eureka.client.register-with-eureka = true
       - eureka.client.serviceUrl.defaultZone = http://eureka-service:8761/eureka
-      - spring.cloud.config.uri = http://config-service:8888
-      - spring.zipkin.base-url = http://zipkin-service:9411
+      - spring.zipkin.base-url = http://zipkin-service:9411/api/v2/spans
     ports:
       - 8080:8080
     networks:
       - vinhoja-network
     depends_on:
-      - config-service
-      - eureka-service
-      - zipkin-service
+      zipkin-service:
+        condition: service_healthy
+      eureka-service:
+        condition: service_started   
 
   user-service:
     build:
@@ -59,15 +91,88 @@ services:
     image: vinhoja/user:0.0.1
     container_name: user-service
     environment:
-      - SPRING_PROFILES_ACTIVE = test
       - eureka.client.service-url.defaultZone = http://eureka-service:8761/eureka
+      - spring.zipkin.base-url = http://zipkin-service:9411/api/v2/spans
       - spring.cloud.import = optional:configserver:http://config-service:8888
     networks:
       - vinhoja-network
     depends_on:
-      - config-service
-      - eureka-service
-      - zipkin-service
+      zipkin-service:
+        condition: service_healthy
+      eureka-service:
+        condition: service_started
+      config-service:
+        condition: service_healthy
+
+  card-service:
+    build:
+      dockerfile: ./card/Dockerfile
+      context: .
+    image: vinhoja/card:0.0.1
+    container_name: card-service
+    environment:
+      - eureka.client.service-url.defaultZone = http://eureka-service:8761/eureka
+      - spring.zipkin.base-url = http://zipkin-service:9411/api/v2/spans
+      - spring.cloud.import = optional:configserver:http://config-service:8888
+    networks:
+      - vinhoja-network
+    depends_on:
+      zipkin-service:
+        condition: service_healthy
+      eureka-service:
+        condition: service_started
+      config-service:
+        condition: service_healthy
+
+  payment-service:
+    build:
+      dockerfile: ./payment/Dockerfile
+      context: .
+    image: vinhoja/payment:0.0.1
+    container_name: payment-service
+    environment:
+      - eureka.client.service-url.defaultZone = http://eureka-service:8761/eureka
+      - spring.zipkin.base-url = http://zipkin-service:9411/api/v2/spans
+      - spring.cloud.import = optional:configserver:http://config-service:8888
+      - spring.rabbit.host = rabbit-mq
+      - spring.rabbit.password = guest
+      - spring.rabbit.username = guest
+    networks:
+      - vinhoja-network
+    depends_on:
+      zipkin-service:
+        condition: service_healthy
+      eureka-service:
+        condition: service_started
+      config-service:
+        condition: service_healthy
+      rabbit-mq:
+        condition: service_healthy
+
+  email-service:
+    build:
+      dockerfile: ./email/Dockerfile
+      context: .
+    image: vinhoja/email:0.0.1
+    container_name: email-service
+    environment:
+      - eureka.client.service-url.defaultZone = http://eureka-service:8761/eureka
+      - spring.zipkin.base-url = http://zipkin-service:9411/api/v2/spans
+      - spring.cloud.import = optional:configserver:http://config-service:8888
+      - spring.rabbit.host = rabbit-mq
+      - spring.rabbit.password = guest
+      - spring.rabbit.username = guest
+    networks:
+      - vinhoja-network
+    depends_on:
+      zipkin-service:
+        condition: service_healthy
+      eureka-service:
+        condition: service_started
+      config-service:
+        condition: service_healthy
+      rabbit-mq:
+        condition: service_healthy                    
 
 networks:
   vinhoja-network:

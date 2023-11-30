@@ -10,6 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AccordionModule } from 'primeng/accordion';     //accordion and accordion tab
 import { ButtonModule } from 'primeng/button';
 import { StepsModule } from 'primeng/steps';
+import { CardModule } from 'primeng/card';
+import { MessagesModule } from 'primeng/messages';
+import { InputTextModule } from 'primeng/inputtext';
 
 import { HeaderComponent } from './components/template/header/header.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
@@ -35,7 +38,10 @@ import { CartaoComponent } from './components/cartao/cartao.component';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    StepsModule
+    StepsModule,
+    CardModule,
+    MessagesModule,
+    InputTextModule
   ],
   providers: [],
   bootstrap: [AppComponent]

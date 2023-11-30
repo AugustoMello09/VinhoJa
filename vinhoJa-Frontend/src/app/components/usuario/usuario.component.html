@@ -1,3 +1,46 @@
 <app-header></app-header>
 <app-steps></app-steps>
-<p>usuario works!</p>
+<main class="text-center">
+  
+  <div class="flex laptop:flex-col laptop:justify-between items-center justify-around h-[75vh]">
+    
+    <p-card class="w-1/2 laptop:p-6 tablet:w-full">
+      
+      <ng-template pTemplate="title">
+        Dados Pessoais
+      </ng-template>
+      
+      <ng-template pTemplate="subtitle">
+        Para iniciar seu pagamento, precisamos de algumas informações pessoais. Por favor, informe seu nome e endereço de e-mail.
+      </ng-template>
+      
+      <form #f="ngForm" (submit)="onSubmit()">
+        <div class="p-4 flex flex-col">
+          <label for="nome" class="p-4 text-left">Nome</label>
+          <input type="text" placeholder="Ex José" maxlength="35" ngModel required pInputText name="nome" [(ngModel)]="usuario.nome" id="nome"/>
+          <div *ngIf="(f.controls['nome']?.invalid && f.controls['nome']?.touched) || f.controls['nome']?.dirty">
+            <span class="text-red-600 font-font-secundaria font-bold text-sm" *ngIf="f.controls['nome']?.errors?.['required']">O campo Nome deve ser preenchido.</span>
+          </div>
+        </div>
+          
+        <div class="p-4 flex flex-col">
+          <label for="email" class="p-4 text-left">Email</label>
+          <input type="text" placeholder="Teste@gmail.com" pInputText ngModel required required name="email" [(ngModel)]="usuario.email" id="email"/>
+          <div *ngIf="(f.controls['email']?.invalid && f.controls['email']?.touched) || f.controls['email']?.dirty">
+            <span class="text-red-600 font-font-secundaria font-bold text-sm" *ngIf="f.controls['email']?.errors?.['required']">O campo Email deve ser preenchido.</span>
+          </div>
+        </div>
+    
+        <div class="grid grid-nogutter justify-content-end">
+          <p-button label="Próximo" type="submit" icon="pi pi-angle-right" iconPos="right"></p-button>
+          <p-messages [value]="message1" class="mx-4 sm:overflow-auto sm:w-full"></p-messages>
+        </div>
+      </form>
+     
+    </p-card>
+        
+    <app-produto></app-produto>  
+
+  </div>
+
+</main>

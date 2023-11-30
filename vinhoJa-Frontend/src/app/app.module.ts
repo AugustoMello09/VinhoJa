@@ -15,6 +15,7 @@ import { HeaderComponent } from './components/template/header/header.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { StepsComponent } from './components/template/steps/steps.component';
 import { ProdutoComponent } from './components/produto/produto.component';
+import { CartaoComponent } from './components/cartao/cartao.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ProdutoComponent } from './components/produto/produto.component';
     HeaderComponent,
     UsuarioComponent,
     StepsComponent,
-    ProdutoComponent
+    ProdutoComponent,
+    CartaoComponent
   ],
   imports: [
     BrowserModule,

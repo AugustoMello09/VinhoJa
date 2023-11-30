@@ -17,6 +17,10 @@ export class StepsComponent implements OnInit {
       {
           label: 'Dados Pessoais',
           routerLink: ''
+      },
+      {
+        label: 'Dados Financeiro',
+        routerLink: '/cartao'
       },];
   }
 

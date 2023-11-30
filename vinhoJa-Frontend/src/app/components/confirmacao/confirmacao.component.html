@@ -1,3 +1,43 @@
 <app-header></app-header>
 <app-steps></app-steps>
-<p>confirmacao works!</p>
+<main class="text-center">
+  
+  <div class="flex flex-col items-center justify-center h-[70vh]">  
+    
+    <p-card class="p-6">
+      
+      <ng-template pTemplate="title">
+          <p class="font-font-primaria font-bold text-4xl tablet:text-2xl">Confirmação</p>
+      </ng-template>
+      <ng-template pTemplate="subtitle">
+          <p class="font-font-secundaria font-semibold text-2xl tablet:text-base">Verifique se os dados de cartão fornecidos anteriormente estão corretos.</p> 
+      </ng-template>
+      <ng-template pTemplate="content">
+          <div>
+              <label for="nome" class="text-xl tablet:text-base">Nome do Titular</label>
+              <p class="p-1">{{ dados.nomeCartao}}</p>
+          </div>
+          <div>
+              <label for="cartao" class="text-xl tablet:text-base">Número do cartão</label>
+              <p class="p-1">{{ dados.numeroCartao }}</p>
+          </div>
+          <div>
+              <label for="data" class="text-xl tablet:text-base">Data de vencimento</label>
+              <p class="p-1">{{ dados.dataExp }}</p>
+          </div>
+          <div *ngIf="!mostrarLabel">
+              <label for="code" class="text-xl tablet:text-base">Código de segurança</label>
+              <p class="p-1">{{ dados.cod }}</p>
+          </div>
+      </ng-template>
+      <ng-template pTemplate="footer">
+          <div class="flex items-center justify-between">
+              <p-button label="Voltar" (click)="returnPage()" icon="pi pi-angle-left"></p-button>
+              <p-button label="Confirmar" (click)="confirm()" styleClass="p-button-success"></p-button>
+          </div>
+      </ng-template>
+    </p-card>
+    <p-button label="Finalizar" (click)="finalizar()" [disabled]="!pronto" styleClass="p-button-success"></p-button>
+  </div>
+
+</main>

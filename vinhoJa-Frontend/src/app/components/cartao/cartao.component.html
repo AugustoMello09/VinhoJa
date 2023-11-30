@@ -1,3 +1,56 @@
 <app-header></app-header>
 <app-steps></app-steps>
-<p>cartao works!</p>
+<main class="text-center">
+  
+  <div class="flex laptop:flex-col laptop:justify-between items-center justify-around h-[80vh] desktop:h-[95vh]">
+    
+    <p-card class="w-1/2 laptop:p-6 tablet:w-full">
+      
+      <ng-template pTemplate="title">
+        Dados Financeiros
+      </ng-template>
+      
+      <ng-template pTemplate="subtitle">
+        Para continuar seu pagamento, precisamos de algumas informações pessoais. Por favor, Insira os dados do seu cartão.
+      </ng-template>
+
+      <form #f="ngForm" (submit)="onSubmit()"> 
+         
+          <div class="p-4 flex flex-col desktop:p-0">
+              <label for="nome"  class="p-4 text-left desktop:text-center desktop:p-0">Nome do Titular</label>
+              <input name="nome" type="text" ngModel required maxlength="16" pInputText [(ngModel)]="cartao.nomeCartao"> 
+              <div *ngIf="(f.controls['nome']?.invalid && f.controls['nome']?.touched) || f.controls['nome']?.dirty">
+                <span class="text-red-600 font-font-secundaria font-bold text-sm" *ngIf="f.controls['nome']?.errors?.['required']">O campo Nome do cartão deve ser preenchido.</span>
+              </div>
+            </div>
+          
+          <div class="flex items-center justify-between desktop:flex-col">
+            
+            <div class="p-4 flex flex-col desktop:p-1">
+              <label for="numero"  class="p-4 text-center desktop:p-1">Número do cartão</label>
+              <p-inputMask name="numero" inputId="number" mask="9999-9999-9999-9999" [(ngModel)]="cartao.numeroCartao"></p-inputMask>
+            </div>
+            
+            <div class="p-4 flex flex-col desktop:p-1">
+              <label id="data" for="data"  class="p-4 text-center desktop:p-1">Data de vencimento</label>
+              <p-inputMask name="data" inputId="date" mask="99/99" [(ngModel)]="cartao.dataExp"></p-inputMask>
+            </div>
+            
+            <div class="p-4 flex flex-col desktop:p-1">
+              <label for="cvv"  class="p-4 text-center desktop:p-1">Código de segurança</label>
+              <p-inputMask id="cvv" name="cvv" mask="999" [(ngModel)]="cartao.cod"></p-inputMask>
+            </div>
+          
+          </div>   
+      
+        <div class="flex justify-center items-center">
+          <p-button label="Próximo" type="submit" icon="pi pi-angle-right" iconPos="right" [disabled]="!f.valid"></p-button>
+        </div>
+      </form>
+    </p-card>
+        
+    <app-produto></app-produto>  
+
+  </div>
+
+</main>

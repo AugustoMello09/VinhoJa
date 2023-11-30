@@ -13,6 +13,7 @@ import { StepsModule } from 'primeng/steps';
 import { CardModule } from 'primeng/card';
 import { MessagesModule } from 'primeng/messages';
 import { InputTextModule } from 'primeng/inputtext';
+import { InputMaskModule } from 'primeng/inputmask';
 
 import { HeaderComponent } from './components/template/header/header.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
@@ -41,7 +42,8 @@ import { CartaoComponent } from './components/cartao/cartao.component';
     StepsModule,
     CardModule,
     MessagesModule,
-    InputTextModule
+    InputTextModule,
+    InputMaskModule
   ],
   providers: [],
   bootstrap: [AppComponent]

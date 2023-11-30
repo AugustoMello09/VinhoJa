@@ -14,6 +14,7 @@ import { StepsModule } from 'primeng/steps';
 import { HeaderComponent } from './components/template/header/header.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { StepsComponent } from './components/template/steps/steps.component';
+import { ProdutoComponent } from './components/produto/produto.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { StepsComponent } from './components/template/steps/steps.component';
     AppComponent,
     HeaderComponent,
     UsuarioComponent,
-    StepsComponent
+    StepsComponent,
+    ProdutoComponent
   ],
   imports: [
     BrowserModule,

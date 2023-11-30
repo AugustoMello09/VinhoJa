@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+    <g fill="none" fill-rule="evenodd">
+        <ellipse cx="10.647" cy="22.236" stroke="#573D90" stroke-width="1.5" rx="2.692" ry="2.764"/>
+        <ellipse cx="19.327" cy="22.236" stroke="#573D90" stroke-width="1.5" rx="2.692" ry="2.764"/>
+        <ellipse cx="28.007" cy="22.236" stroke="#573D90" stroke-width="1.5" rx="2.692" ry="2.764"/>
+        <ellipse cx="36.687" cy="22.236" stroke="#573D90" stroke-width="1.5" rx="2.692" ry="2.764"/>
+        <ellipse cx="10.647" cy="32.319" stroke="#573D90" stroke-width="1.5" rx="2.692" ry="2.764"/>
+        <ellipse cx="19.327" cy="32.319" stroke="#573D90" stroke-width="1.5" rx="2.692" ry="2.764"/>
+        <ellipse cx="28.007" cy="32.319" stroke="#573D90" stroke-width="1.5" rx="2.692" ry="2.764"/>
+        <ellipse cx="36.687" cy="32.319" stroke="#573D90" stroke-width="1.5" rx="2.692" ry="2.764"/>
+        <path stroke="#573D90" stroke-width="1.5" d="M4.365 35.833v-25.66a5 5 0 0 1 5-5h30.053a5 5 0 0 1 5 5v29.714a5 5 0 0 1-5 5H5.646A4.646 4.646 0 0 1 1 40.241h21.157"/>
+        <path stroke="#573D90" stroke-width="1.5" d="M28.82 40.506h8.897c.566 2.921 2.052 4.381 4.458 4.381"/>
+        <ellipse cx="25.245" cy="40.417" fill="#573D90" rx="1" ry="1"/>
+        <ellipse cx="39.612" cy="12.458" fill="#573D90" rx="1" ry="1"/>
+        <path stroke="#573D90" stroke-width="1.5" d="M4.38 12.698h32.328"/>
+        <rect width="4.786" height="6.75" x="12.744" y="1.75" fill="#FFF" stroke="#573D90" stroke-width="1.5" rx="2.393"/>
+        <rect width="4.786" height="6.75" x="32.499" y="1.75" fill="#FFF" stroke="#573D90" stroke-width="1.5" rx="2.393"/>
+    </g>
+</svg>

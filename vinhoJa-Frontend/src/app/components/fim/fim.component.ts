@@ -10,6 +10,8 @@ export class FimComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    localStorage.removeItem('cartao');
+    localStorage.removeItem('usuario');
   }
 
 }

@@ -313,7 +313,7 @@ __ATENÇÃO__ : não use os dados do cartão de crédito real.
 
 - __Acesse:__ https://www.4devs.com.br/gerador_de_numero_cartao_credito para gerar os dados do cartão.
 
-### Ferramentas e Tecnologias usadas no Fornt-end ⚙️
+### Ferramentas e Tecnologias usadas no Frontend ⚙️
 <div style="display: inline_block"><br>
 
 <img align="center" alt="Augusto-HTML" height="50" width="50" src="https://raw.githubusercontent.com/devicons/devicon/1119b9f84c0290e0f0b38982099a2bd027a48bf1/icons/html5/html5-plain.svg">
